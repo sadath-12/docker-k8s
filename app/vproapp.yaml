@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+## keep the same as mentioned in application properties 
+metadata:
+  name: vproapp
+  labels: 
+    app: vproapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vproapp
+  template:
+    metadata:
+      labels:
+        app: vproapp
+    spec:
+      containers:
+      - name: vproapp
+        image: sadath17/vproapp:V2
+        ports:
+        - name: vproapp-port
+          containerPort: 8080
+          ## first this container will be executed
+          ## its work is to check if our db and memcache is ready every 2sec and will keep on running till its true
+          ## when this jobs r completed the container is deleted and above containers is created
+
+      initContainers:
+        - name: init-mydb
+          image: busybox    
+          command: ['sh','-c','until nslookup vprodb; do echo waiting for mydb; sleep 2; done;']
+      
+        - name: init-memcache
+          image: busybox    
+          command: ['sh','-c','until nslookup vprocache01; do echo waiting for memcach; sleep 2; done;']
+            

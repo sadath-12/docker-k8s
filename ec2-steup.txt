@@ -1,0 +1,32 @@
+run ec2
+ssh-keygen (used by kops )
+install kubectl
+chmod +x ./kubectl
+sudo mv kubectl /usr/local/bin
+install kops
+sudo chmod +x kops-linux-amd64
+sudo mv kops-linux-amd64 /usr/local/bin/kops
+kops create cluster sadath.link --state=s3://kops-sadu-17 --zones=ap-northeast-1a,ap-northeast-1c --node-count=2 --node-size=t3.small --master-size=t3.medium --dns-zone=sadath.link --node-volume-size=8 --master-volume-size=8
+kops update cluster --name sadath.link --yes --admin --state s3://kops-sadu-17
+
+kops validate cluster --state=s3://kops-sadu-17
+kops delete  cluster --name=sadath.link --state=s3://kops-sadu-17 --yes
+sudo poweroff
+
+.kube/config is used to connect to cluster
+
+kubectl config view
+
+for loggings
+kubectl logs <pod_name>
+history | grep test47(some exec)
+
+
+ingress 
+ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/aws/deploy.yaml
+
+we create ingress for the service
+
+
+aws ec2 create-volume --availability-zone=ap-northeast-1a --size=3 --volume-type=gp2
+volume_id = vol-0227bcdd26d8e41ab"
