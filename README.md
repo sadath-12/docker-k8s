@@ -13,4 +13,6 @@
 ## to setup k8s cluster following ec2-setup.txt
 
 
-# This setup is for the app <git clone -b vp-docker https://github.com/devopshydclub/vprofile-project.git>
+## This setup is for the app <git clone -b vp-docker https://github.com/devopshydclub/vprofile-project.git>
+
+## Make sure to match names of images and that in application properties
