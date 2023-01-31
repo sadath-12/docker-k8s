@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
   # because this port i used while dockerising the container
-    - port: 3308
+    - port: 3306
       targetPort: vprodb-port
       protocol: TCP
   selector:

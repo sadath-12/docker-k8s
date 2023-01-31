@@ -25,7 +25,7 @@ spec:
               name: vpro-db-data
           ports:
             - name: vprodb-port
-              containerPort: 3308
+              containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:

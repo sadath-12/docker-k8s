@@ -1,0 +1,42 @@
+version: '3'
+services:
+  vpronginx:
+    image: sadath17/vproweb:V2
+    ports:
+      - "80:80"
+
+  vproapp:
+    image: sadath17/vproapp:V2
+    ports:
+      - "8080:8080"
+    volumes:
+    ## then all the data location /var/lib/mysql of mysql container wil b downloaded in vprodbdata
+      - vprodbdata:/var/lib/mysql  
+
+  vprocache01:
+    image: memcached
+    ports:
+      - "11211:11211"
+
+  vpromq01:
+  ## just taking the official image
+    image: rabbitmq
+    ports:
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  vprodb:
+    image: sadath17/vprodb:V2
+    ports:
+      - "3308:3306"
+    volumes:
+    ## then all the data location /var/lib/mysql of mysql container wil b downloaded in vprodbdata
+      - vprodbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=sadudbpass
+
+volumes:
+  vprodbdata: {}
+  vproappdata: {}

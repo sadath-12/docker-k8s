@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: vproapp
-        image: sadath17/vproapp:V3
+        image: sadath17/vproapp:V2
         ports:
         - name: vproapp-port
           containerPort: 8080
